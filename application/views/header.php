@@ -17,6 +17,14 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
+      <style>
+        .modal form{
+          display: flex;
+          -webkit-justify-content: center; /* Safari */
+          justify-content: center;
+          margin-top: 50px;
+        }
+      </style>
     </head>
     <body>
       <div class="container-fluid">
@@ -38,10 +46,41 @@
               <ul class="nav navbar-nav">
                 <li><a href="#">Рестораны</a></li>
                 <li><a href="#">Кинотеатры</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#myModal" id="chat">Чат</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
         </nav>
       </div>
 
+      <div class="modal fade" role="dialog" id="myModal">
+        <div id="msglist" name="msglist">
+
+        </div>
+        <form>
+          <label for="msg">Message</label>
+          <input type="text" id="msg" name="msg">
+          <input type="submit" name="send" value="Send" id="send">
+        </form>
+      </div>
+
+
+
+
+      <script>
+        $(document).ready(function() {
+
+          $('#chat').click(function(){
+
+           $.ajax({url:"locations/getMessages",
+            type: "post",
+            succees: function(data) {
+              $("#msglist").html(data);
+            }
+            
+          }); 
+         })
+
+        });
+      </script>
 

@@ -13,4 +13,30 @@ class Locations_model extends CI_Model
 		$cats=$res->result_array();
 		return $cats;
 	}
+
+	function getPlaces($id=1)
+	{
+		$this->db->where('catid',$id);
+		$res=$this->db->get('places');
+		$places=$res->result_array();
+		return $places;
+	}
+
+	function getPlaceById($id)
+	{
+		$this->db->where('id',$id);
+		$res=$this->db->get('places');
+		$places=$res->result_array();
+		return $places;
+	}
+
+	function get20Messages()
+	{
+		$limit = 20;
+		$offset = 0;
+		$this->db->order_by('stamp','DESC');
+		$res = $this->db->get('Messages',$limit,$offset);
+		$items=$res->result_array();
+		return $items;
+	}
 }

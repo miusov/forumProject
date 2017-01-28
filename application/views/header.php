@@ -10,6 +10,8 @@
   <link href="<?php echo base_url();?>css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="<?php echo base_url();?>css/style.css">
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,41 +48,51 @@
               <ul class="nav navbar-nav">
                 <li><a href="#">Рестораны</a></li>
                 <li><a href="#">Кинотеатры</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#myModal" id="chat">Чат</a></li>
+                <li><a href="#" data-toggle="modal" id="chat">Чат</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
         </nav>
       </div>
 
-      <div class="modal fade" role="dialog" id="myModal">
-        <div id="msglist" name="msglist">
+      <!-- Modal -->
+      <div class="modal fade" role="dialog" id="mymodal">
 
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header" style="padding:35px 50px;">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body" style="padding:40px 50px;">
+              <div id="msglist" name="msglist">
+              </div>
+              <form role="form" method="post">
+                <label for="msg">Message</label>
+                <input type="text" id="msg" name="msg">
+                <input type="submit" value="Отправить" id="send" name="send">
+              </form>
+              <div class="modal-footer">
+              </div>
+            </div>
+          </div>
         </div>
-        <form>
-          <label for="msg">Message</label>
-          <input type="text" id="msg" name="msg">
-          <input type="submit" name="send" value="Send" id="send">
-        </form>
       </div>
-
-
 
 
       <script>
         $(document).ready(function() {
-
           $('#chat').click(function(){
-
-           $.ajax({url:"locations/getMessages",
-            type: "post",
-            succees: function(data) {
-              $("#msglist").html(data);
-            }
-            
-          }); 
-         })
-
+            $.ajax({url:"<?php echo base_url(); ?>index.php/Locations/getMessages/",
+              type: "post",
+              success: function(data) {
+                $("#msglist").html(data);
+              }
+            }); 
+            $('#mymodal').modal('show');
+          });         
         });
       </script>
 

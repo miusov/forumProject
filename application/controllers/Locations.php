@@ -30,8 +30,10 @@ class Locations extends CI_Controller
 	function getMessages()
 	{
 		$items=$this->locations_model->get20Messages();
-		$data['items']=$items;
-		$this->load->view('header',$data);
+		$this->load->library('table');
+		$style=array('table_open'=>'<table class="table table-striped">');
+		$this->table->set_template($style);
+		echo $this->table->generate($items);
 	}
 
 	function showPlaceMap($lat, $lng)

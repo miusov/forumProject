@@ -63,4 +63,8 @@ class Locations extends CI_Controller
 		$map=$this->googlemaps->create_map();
 		return $map;
 	}
+
+	function sendMessage($msg){
+		$this->locations_model->sendMessage($msg);
+	}
 }

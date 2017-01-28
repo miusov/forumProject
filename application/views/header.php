@@ -62,18 +62,18 @@
 
           <!-- Modal content-->
           <div class="modal-content">
-            <div class="modal-header" style="padding:35px 50px;">
+            <div class="modal-header" style="padding:10px 20px;">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
 
             </div>
-            <div class="modal-body" style="padding:40px 50px;">
+            <form role="form" method="post">
+              <label for="msg">Message </label>
+              <input type="text" id="msg" name="msg">
+              <input type="submit" value="Отправить" id="send" name="send">
+            </form>
+            <div class="modal-body" style="padding:40px 50px 10px 50px;">
               <div id="msglist" name="msglist">
               </div>
-              <form role="form" method="post">
-                <label for="msg">Message</label>
-                <input type="text" id="msg" name="msg">
-                <input type="submit" value="Отправить" id="send" name="send">
-              </form>
               <div class="modal-footer">
               </div>
             </div>
@@ -92,7 +92,21 @@
               }
             }); 
             $('#mymodal').modal('show');
-          });         
+          });
+
+          $('#send').click(function() {
+            msg=$('#msg').val();
+            $.ajax({
+              url:"<?php echo base_url(); ?>index.php/Locations/sendMessage/"+msg,
+              type:'post',
+              success: function(data) {
+                $('#mymodal').modal('show');
+              },
+              error:function() {
+                alert('error');
+              }
+            });
+          });
         });
       </script>
 

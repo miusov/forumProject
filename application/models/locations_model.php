@@ -39,4 +39,14 @@ class Locations_model extends CI_Model
 		$items=$res->result_array();
 		return $items;
 	}
+
+	function sendMessage($msg)
+	{
+		$data = array(
+			'userid' => 1,
+			'comment' => rawurldecode($msg),
+			// 'stamp' => time()
+			);
+		$this->db->insert('Messages', $data);
+	}
 }

@@ -5,3 +5,12 @@ body{
 .left{
 	border-right: 1px black solid;
 }
+
+.modal form{
+	margin-top: 20px !important;
+}
+
+#msg{
+	width: 320px;
+	margin: 0 15px;
+}

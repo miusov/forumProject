@@ -31,7 +31,8 @@ class Locations extends CI_Controller
 	{
 		$items=$this->locations_model->get20Messages();
 		$this->load->library('table');
-		$style=array('table_open'=>'<table class="table table-striped">');
+		$style=array('table_open'=>'<table class="table table-striped">',
+			'heading_cell_start' => '<th style="font-weight: normal">');
 		$this->table->set_template($style);
 		echo $this->table->generate($items);
 	}
